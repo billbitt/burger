@@ -17,16 +17,15 @@ router.get("/", function(request, response){
 });
 
 router.post("/api/new", function(request, response){
-    console.log(request.body);
     var name = request.body.burgerName;
-    console.log("controller passes:", name);
     burger.insertBurger(name, function(){
         response.redirect("/");
     })
 });
 
-router.put("/api/:id", function(request, response){
-    burger.updateEaten(request.params.id, function(){
+router.put("/api/eat/:id", function(request, response){
+    var id = request.params.id;
+    burger.updateEaten(id, function(){
         response.redirect("/");
     })
 })
