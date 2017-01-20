@@ -29,9 +29,16 @@ router.post("/api", function(request, response){
     };
 });
 
-router.put("/api/:id", function(request, response){
+router.put("/api/eat/:id", function(request, response){
     var id = request.params.id;
     burger.updateEaten(id, function(){
+        response.redirect("/");
+    })
+})
+
+router.put("/api/no-eat/:id", function(request, response){
+    var id = request.params.id;
+    burger.updateNotEaten(id, function(){
         response.redirect("/");
     })
 })

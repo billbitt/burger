@@ -44,11 +44,11 @@ var orm = {
         })
     },
     // method to update one entry 
-    updateOne: function(tableName, column, entry, updateColumn, updateEntry, modelCallback){
+    updateOne: function(tableName, update, condition, modelCallback){
         // build the query
         var sqlQuery = "UPDATE " + tableName + " ";
-        sqlQuery += "SET " + updateColumn + " = " + updateEntry +" ";
-        sqlQuery += "WHERE " + column + " = " + entry + ";";
+        sqlQuery += "SET " + update +" ";
+        sqlQuery += "WHERE " + condition + ";";
         console.log(sqlQuery);
         // make the query 
         connection.query(sqlQuery, function(error, data){

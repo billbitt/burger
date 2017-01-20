@@ -1,36 +1,44 @@
-<h1>Track your burgers!</h1>
-
-<img src="/assets/img/burger.jpg" alt="burger" class="main-image">
-<h2> Add a new Burger to your list </h2>
-<form action="/api" method="POST">
-    <input type="text" name="burgerName" placeholder="Enter burger name here">
-    <button type="submit">Submit</button>
-</form>
-
-<h2> burgers to eat </h2>
-<ul>
-    {{#each burgers}}
-        {{#unless this.eaten}}
-            <li>
-                {{this.burger_name}}
-                <form action="/api/{{this.id}}?_method=PUT" method="POST">
-                    <button type="submit">EAT</button>
-                </form>
-            </li>
-        {{/unless}}
-    {{/each}}
-</ul>
-
-<h2> burgers you have eaten </h2>
-<ul>
-    {{#each burgers}}
-        {{#if this.eaten}}
-            <li>
-                {{this.burger_name}}
-                <form action="/api/{{this.id}}?_method=DELETE" method="POST">
-                    <button type="submit">DELETE</button>
-                </form>
-            </li>
-        {{/if}}
-    {{/each}}
-</ul>
+<div class="row">
+    <h1>Burger Helper</h1>
+    <h3>Eat burgers. Track your progress.  Have fun!</h3>
+    <img src="/assets/img/burger.jpg" alt="burger" class="main-image">
+    <h2>Add a new Burger to your list!</h2>
+    <form action="/api" method="POST">
+        <input type="text" name="burgerName" placeholder="Enter burger name here">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<div class="row">
+    <div class="container-left">
+        <h2 class="container-heading">Burgers I want to eat</h2>
+        {{#each burgers}} 
+            {{#unless this.eaten}}
+                <div class="burger not-eaten">
+                    <p>Name: {{this.burger_name}}</P>
+                    {{!--button to move to the eaten list--}}
+                    <form action="/api/eat/{{this.id}}?_method=PUT" method="POST">
+                        <button type="submit">I ate this!</button>
+                    </form>
+                 </div>
+            {{/unless}}
+        {{/each}}
+    </div>
+    <div class="container-right">
+        <h2 class="container-heading">Burgers I have eaten</h2>
+        {{#each burgers}}
+            {{#if this.eaten}}
+                <div class="burger eaten">
+                    <p>Name: {{this.burger_name}}</P>
+                    {{!--button to delete from database--}}
+                    <form action="/api/{{this.id}}?_method=DELETE" method="POST">
+                        <button type="submit">Remove from database</button>
+                    </form>
+                    {{!--button to move back to waiting-to-eat list--}}
+                    <form action="/api/no-eat/{{this.id}}?_method=PUT" method="POST">
+                        <button type="submit">I did not eat this</button>
+                    </form>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
