@@ -1,0 +1,15 @@
+CREATE DATABASE burgers_db;
+
+USE burgers_db;
+
+CREATE TABLE burgers (
+    id INTEGER(4) AUTO_INCREMENT NOT NULL,
+    burger_name VARCHAR(30) NOT NULL,
+    eaten BOOLEAN DEFAULT FALSE NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE burgers;
+
+SELECT * FROM burgers;
