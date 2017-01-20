@@ -15,7 +15,17 @@ var burgerModel = {
     },
     //method for updating one burger in the burgers table 
     updateEaten: function(burgerId, controllerCallback){
-        orm.updateOne("burgers", "id", burgerId, "eaten", true, function(response){
+        var update = "eaten = true";
+        var condition = "id = " + burgerId;
+        orm.updateOne("burgers", update, condition, function(response){
+            controllerCallback(response);
+        });
+    },
+    //method for updating one burger in the burgers table 
+    updateNotEaten: function(burgerId, controllerCallback){
+        var update = "eaten = false";
+        var condition = "id = " + burgerId;
+        orm.updateOne("burgers", update, condition, function(response){
             controllerCallback(response);
         });
     },

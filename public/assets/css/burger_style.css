@@ -1,3 +1,38 @@
+h3{
+    font-style: italic;
+    line-height: 1;
+}
+
+.row {
+    text-align: center;
+}
+
+.container-right, .container-left {
+    text-align: left;
+}
+.container-left{
+    float: left;
+    width: 40%;
+    margin-left: 5%;
+}
+
+.container-right{
+    float: right;
+    width: 40%;
+    margin-right: 5%;
+}
+
+.container-heading{
+    text-align: center;
+}
+
 .main-image{
     height: 200px;
+}
+
+.burger{
+    margin: 10px 0px 10px 0px;
+    padding: 10px;
+    background-color: palegoldenrod;
+    color: darkred;
 }
