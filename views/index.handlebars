@@ -32,6 +32,8 @@
                 <div class="burger eaten">
                     <p>Name: {{this.burger_name}}</P>
                     <p>Description: {{this.burger_description}}</P>
+                    <p>Rating: {{this.burger_rating}}</P>
+                    <p>Notes: {{this.burger_notes}}</P>
                     {{!--button to move back to waiting-to-eat list--}}
                     <form action="/api/no-eat/{{this.id}}?_method=PUT" method="POST">
                         <button type="submit">I did not eat this</button>
