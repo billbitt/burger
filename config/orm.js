@@ -2,6 +2,14 @@ var connection = require("./connection.js");
 
 // helper function to wrap multiple words in single quotes for sqlQuery
 function wrapInQuotes(unwrappedString){
+    //escape any apostrophies inside the text
+    for (var i = 0; i < unwrappedString.length; i++){
+        if (unwrappedString[i] === "'"){
+            unwrappedString = unwrappedString.slice(0,i) + "'" + unwrappedString.slice(i);
+            i += 1; //permaturely increase the index by 1 to jump the newly added character next time through
+        };
+    };
+    //wrap in a string
     var wrappedString = "'" + unwrappedString + "'";
     return wrappedString;
 }
@@ -46,6 +54,21 @@ var orm = {
         connection.query(sqlQuery, function(error, data){
             if (error) {
                 console.log("an error occured with updateOne:", error);
+                return;
+            }
+            modelCallback(data);
+        })
+    },
+    // method to delete one entry 
+    deleteOne: function(tableName, condition, modelCallback){
+        // build the query
+        var sqlQuery = "DELETE FROM " + tableName + " ";
+        sqlQuery += "WHERE " + condition + ";";
+        console.log(sqlQuery);
+        // make the query 
+        connection.query(sqlQuery, function(error, data){
+            if (error) {
+                console.log("an error occured with deleteOne:", error);
                 return;
             }
             modelCallback(data);

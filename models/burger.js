@@ -18,7 +18,14 @@ var burgerModel = {
         orm.updateOne("burgers", "id", burgerId, "eaten", true, function(response){
             controllerCallback(response);
         });
-    }
+    },
+    //method for deleting one burger in the burgers table 
+    deleteBurger: function(burgerId, controllerCallback){
+        var condition = "id = " + burgerId;
+        orm.deleteOne("burgers", condition, function(response){
+            controllerCallback(response);
+        });
+    },
 }
 
 module.exports = burgerModel;

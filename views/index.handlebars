@@ -1,5 +1,36 @@
 <h1>Track your burgers!</h1>
 
 <img src="/assets/img/burger.jpg" alt="burger" class="main-image">
+<h2> Add a new Burger to your list </h2>
+<form action="/api" method="POST">
+    <input type="text" name="burgerName" placeholder="Enter burger name here">
+    <button type="submit">Submit</button>
+</form>
 
-<p>{{burgers}}</p>
+<h2> burgers to eat </h2>
+<ul>
+    {{#each burgers}}
+        {{#unless this.eaten}}
+            <li>
+                {{this.burger_name}}
+                <form action="/api/{{this.id}}?_method=PUT" method="POST">
+                    <button type="submit">EAT</button>
+                </form>
+            </li>
+        {{/unless}}
+    {{/each}}
+</ul>
+
+<h2> burgers you have eaten </h2>
+<ul>
+    {{#each burgers}}
+        {{#if this.eaten}}
+            <li>
+                {{this.burger_name}}
+                <form action="/api/{{this.id}}?_method=DELETE" method="POST">
+                    <button type="submit">DELETE</button>
+                </form>
+            </li>
+        {{/if}}
+    {{/each}}
+</ul>

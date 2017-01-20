@@ -11,21 +11,34 @@ router.get("/", function(request, response){
         var handlebarsObject = {
             burgers: data
         };
-        //response.render("index", handlebarsObject)
-        response.send(data);
+        response.render("index", handlebarsObject)
+        //response.send(data);
     });
 });
 
-router.post("/api/new", function(request, response){
+router.post("/api", function(request, response){
     var name = request.body.burgerName;
-    burger.insertBurger(name, function(){
+    //check to make sure name is not empty
+    if (name === ""){
+        console.log("post request contained an empty burger name");
         response.redirect("/");
-    })
+    } else {
+        burger.insertBurger(name, function(){
+            response.redirect("/");
+        });
+    };
 });
 
-router.put("/api/eat/:id", function(request, response){
+router.put("/api/:id", function(request, response){
     var id = request.params.id;
     burger.updateEaten(id, function(){
+        response.redirect("/");
+    })
+})
+
+router.delete("/api/:id", function(request, response){
+    var id = request.params.id;
+    burger.deleteBurger(id, function(){
         response.redirect("/");
     })
 })
