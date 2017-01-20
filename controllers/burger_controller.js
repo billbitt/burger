@@ -44,6 +44,21 @@ router.put("/api/no-eat/:id", function(request, response){
     })
 })
 
+router.put("/api/update/:id", function(request, response){
+    //the id will come from the request parameters from the url
+    var id = request.params.id;
+    //the values from the form will come through in the request body 
+    var updates = {
+        burger_name: request.body.burgerName, 
+        burger_description: request.body.burgerDescription,
+        burger_rating: request.body.burgerRating,
+        burger_notes: request.body.burgerNotes
+    }
+    burger.updateAll(id, updates, function(){
+        response.redirect("/");
+    })
+})
+
 router.delete("/api/:id", function(request, response){
     var id = request.params.id;
     burger.deleteBurger(id, function(){

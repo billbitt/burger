@@ -32,6 +32,13 @@ var burgerModel = {
             controllerCallback(response);
         });
     },
+    //method for updating all of the burger's data
+    updateAll: function(burgerId, updates, controllerCallback){
+        var condition = "id = " + burgerId;
+        orm.updateAll("burgers", updates, condition, function(response){
+            controllerCallback(response);
+        });
+    },
     //method for deleting one burger in the burgers table 
     deleteBurger: function(burgerId, controllerCallback){
         var condition = "id = " + burgerId;

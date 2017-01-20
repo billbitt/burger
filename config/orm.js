@@ -1,12 +1,27 @@
 var connection = require("./connection.js");
 
-// helper funtion to print question marks 
+// helper function to print question marks 
 function printQuestionMarks(number){
-    var questionMarksArray = [];
+    var array = [];
+    //push everything to an array 
     for (var i = 0; i < number; i++) {
-        questionMarksArray.push("?");
+        array.push("?");
     };
-    return questionMarksArray.join(",");
+    //return the array as a string 
+    return array.join(",");
+};
+
+// helper function turn an object into sql 
+function objectToSql(object){
+    var array = [];
+    //push everything to an array 
+    for (var key in object){
+        if(object.hasOwnProperty(key)){
+            array.push(key + " = '" + object[key] + "'");
+        };
+    };
+    //return the array as a string
+    return array.join(",")
 };
 
 var orm = {
@@ -41,10 +56,26 @@ var orm = {
         })
     },
     // method to update one entry 
-    updateOne: function(tableName, update, condition, modelCallback){
+    updateOne: function(tableName, values, condition, modelCallback){
         // build the query
         var sqlQuery = "UPDATE " + tableName + " ";
-        sqlQuery += "SET " + update +" ";
+        sqlQuery += "SET " + values +" ";
+        sqlQuery += "WHERE " + condition + ";";
+        console.log(sqlQuery);
+        // make the query 
+        connection.query(sqlQuery, function(error, data){
+            if (error) {
+                console.log("an error occured with updateOne:", error);
+                return;
+            }
+            modelCallback(data);
+        })
+    },
+     // method to update one entry 
+    updateAll: function(tableName, values, condition, modelCallback){
+        // build the query
+        var sqlQuery = "UPDATE " + tableName + " ";
+        sqlQuery += "SET " + objectToSql(values) + " ";
         sqlQuery += "WHERE " + condition + ";";
         console.log(sqlQuery);
         // make the query 
