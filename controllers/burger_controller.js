@@ -18,12 +18,13 @@ router.get("/", function(request, response){
 
 router.post("/api", function(request, response){
     var name = request.body.burgerName;
+    var description = request.body.burgerDescription;
     //check to make sure name is not empty
     if (name === ""){
         console.log("post request contained an empty burger name");
         response.redirect("/");
     } else {
-        burger.insertBurger(name, function(){
+        burger.insertBurger(name, description, function(){
             response.redirect("/");
         });
     };

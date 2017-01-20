@@ -3,13 +3,16 @@ var orm = require("../config/orm.js");
 var burgerModel = {
     //method for selecting all from burgers table , using the orm 
     selectAll: function(controllerCallback){
-        orm.selectAll("burgers", function(response){
+        var columns = "id, burger_name, burger_description, burger_rating, burger_notes, eaten";
+        orm.selectAll("burgers", columns, function(response){
             controllerCallback(response);// i don't understand this callback.  it's the callback that I want to pass to the orm.  I guess what I am saying is take the callback passed from the controller and pass it through to the orm?
         });
     },
     //method for inserting one burger into burgers table 
-    insertBurger: function(burgerName, controllerCallback){
-        orm.insertOne("burgers", "burger_name", burgerName, function(response){
+    insertBurger: function(burgerName, burgerDescription, controllerCallback){
+        var columns = ["burger_name", "burger_description"];
+        var values = [burgerName, burgerDescription];
+        orm.insertOne("burgers", columns, values, function(response){
             controllerCallback(response);
         });
     },

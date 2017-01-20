@@ -5,6 +5,7 @@
     <h2>Add a new Burger to your list!</h2>
     <form action="/api" method="POST">
         <input type="text" name="burgerName" placeholder="Enter burger name here">
+        <textarea type="text" name="burgerDescription" placeholder="Enter a short description"></textarea>
         <button type="submit">Submit</button>
     </form>
 </div>
@@ -15,6 +16,7 @@
             {{#unless this.eaten}}
                 <div class="burger not-eaten">
                     <p>Name: {{this.burger_name}}</P>
+                    <p>Description: {{this.burger_description}}</P>
                     {{!--button to move to the eaten list--}}
                     <form action="/api/eat/{{this.id}}?_method=PUT" method="POST">
                         <button type="submit">I ate this!</button>
@@ -29,13 +31,14 @@
             {{#if this.eaten}}
                 <div class="burger eaten">
                     <p>Name: {{this.burger_name}}</P>
-                    {{!--button to delete from database--}}
-                    <form action="/api/{{this.id}}?_method=DELETE" method="POST">
-                        <button type="submit">Remove from database</button>
-                    </form>
+                    <p>Description: {{this.burger_description}}</P>
                     {{!--button to move back to waiting-to-eat list--}}
                     <form action="/api/no-eat/{{this.id}}?_method=PUT" method="POST">
                         <button type="submit">I did not eat this</button>
+                    </form>
+                    {{!--button to delete from database--}}
+                    <form action="/api/{{this.id}}?_method=DELETE" method="POST">
+                        <button type="submit">Remove from database</button>
                     </form>
                 </div>
             {{/if}}
