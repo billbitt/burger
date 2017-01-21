@@ -7,7 +7,7 @@ var expressHandlebars = require("express-handlebars");
 // define & initialize the server 
 var app = express();
 // define the port 
-var PORT = 3000;
+var PORT = process.env.PORT || 8080;
 
 // configure server to make the public folder accessable 
 app.use(express.static(process.cwd() + "/public"));
