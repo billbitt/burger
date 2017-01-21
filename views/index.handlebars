@@ -5,6 +5,7 @@
     <h2>Add a new Burger to your list!</h2>
     <form action="/api" method="POST">
         <input type="text" name="burgerName" placeholder="Enter burger name here">
+        <textarea type="text" name="burgerDescription" placeholder="Enter a short description"></textarea>
         <button type="submit">Submit</button>
     </form>
 </div>
@@ -14,7 +15,12 @@
         {{#each burgers}} 
             {{#unless this.eaten}}
                 <div class="burger not-eaten">
-                    <p>Name: {{this.burger_name}}</P>
+                    <form action="/api/update/{{this.id}}?_method=PUT" method="POST">
+                        <input name="burgerName" class="burger-input burger-name" value="{{this.burger_name}}">
+                        <label for="burgerDescription">Description:</label> 
+                        <textarea name="burgerDescription" class="burger-input">{{this.burger_description}}</textarea>
+                        <button type="submit">Update</button>
+                    </form>
                     {{!--button to move to the eaten list--}}
                     <form action="/api/eat/{{this.id}}?_method=PUT" method="POST">
                         <button type="submit">I ate this!</button>
@@ -28,14 +34,27 @@
         {{#each burgers}}
             {{#if this.eaten}}
                 <div class="burger eaten">
-                    <p>Name: {{this.burger_name}}</P>
-                    {{!--button to delete from database--}}
-                    <form action="/api/{{this.id}}?_method=DELETE" method="POST">
-                        <button type="submit">Remove from database</button>
+                    <form action="/api/update/{{this.id}}?_method=PUT" method="POST">
+                        <input name="burgerName" class="burger-input burger-name" value="{{this.burger_name}}">
+                        <br>
+                        <label for="burgerDescription">Description:</label> 
+                        <textarea name="burgerDescription" class="burger-input">{{this.burger_description}}</textarea>
+                        <br>
+                        <label for="burgerRating">Rating:</label> 
+                        <input name="burgerRating" class="burger-input" value="{{this.burger_rating}}">
+                        <br>
+                        <label for="burgerNotes">Notes:</label> 
+                        <textarea name="burgerNotes" class="burger-input">{{this.burger_notes}}</textarea>
+                        <br>
+                        <button type="submit">Update</button>
                     </form>
                     {{!--button to move back to waiting-to-eat list--}}
                     <form action="/api/no-eat/{{this.id}}?_method=PUT" method="POST">
                         <button type="submit">I did not eat this</button>
+                    </form>
+                    {{!--button to delete from database--}}
+                    <form action="/api/{{this.id}}?_method=DELETE" method="POST">
+                        <button type="submit">Remove from database</button>
                     </form>
                 </div>
             {{/if}}
