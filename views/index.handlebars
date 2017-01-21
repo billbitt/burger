@@ -15,8 +15,12 @@
         {{#each burgers}} 
             {{#unless this.eaten}}
                 <div class="burger not-eaten">
-                    <p>Name: {{this.burger_name}}</P>
-                    <p>Description: {{this.burger_description}}</P>
+                    <form action="/api/update/{{this.id}}?_method=PUT" method="POST">
+                        <input name="burgerName" class="burger-input burger-name" value="{{this.burger_name}}">
+                        <label for="burgerDescription">Description:</label> 
+                        <textarea name="burgerDescription" class="burger-input">{{this.burger_description}}</textarea>
+                        <button type="submit">Update</button>
+                    </form>
                     {{!--button to move to the eaten list--}}
                     <form action="/api/eat/{{this.id}}?_method=PUT" method="POST">
                         <button type="submit">I ate this!</button>
@@ -31,8 +35,7 @@
             {{#if this.eaten}}
                 <div class="burger eaten">
                     <form action="/api/update/{{this.id}}?_method=PUT" method="POST">
-                        <label for="burgerName">Name:</label> 
-                        <input name="burgerName" class="burger-input" value="{{this.burger_name}}">
+                        <input name="burgerName" class="burger-input burger-name" value="{{this.burger_name}}">
                         <br>
                         <label for="burgerDescription">Description:</label> 
                         <textarea name="burgerDescription" class="burger-input">{{this.burger_description}}</textarea>

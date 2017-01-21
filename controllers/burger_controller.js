@@ -48,12 +48,12 @@ router.put("/api/update/:id", function(request, response){
     //the id will come from the request parameters from the url
     var id = request.params.id;
     //the values from the form will come through in the request body 
-    var updates = {
-        burger_name: request.body.burgerName, 
-        burger_description: request.body.burgerDescription,
-        burger_rating: request.body.burgerRating,
-        burger_notes: request.body.burgerNotes
-    }
+    var updates = {}
+    if (request.body.burgerName != undefined) updates.burger_name = request.body.burgerName;
+    if (request.body.burger_description != undefined) updates.burger_description = request.body.burgerDescription;
+    if (request.body.burger_rating != undefined) updates.burger_rating = request.body.burgerRating;
+    if (request.body.burger_notes != undefined) updates.burger_notes = request.body.burgerNotes;
+
     burger.updateAll(id, updates, function(){
         response.redirect("/");
     })
