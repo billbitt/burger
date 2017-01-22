@@ -52,9 +52,6 @@ router.put("/api/update/:id", function(request, response){
     if (request.body.burgerName != undefined) {
         updates.burger_name = request.body.burgerName;
     };
-    if (request.body.burgerDescription != undefined) {
-        updates.burger_description = request.body.burgerDescription;
-    };
     if (request.body.burgerRating != undefined) {
         updates.burger_rating = request.body.burgerRating;
     };

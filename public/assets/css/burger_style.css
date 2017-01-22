@@ -1,50 +1,102 @@
-h3{
-    font-style: italic;
-    line-height: 1;
-}
-
+/*format for all rows*/
 .row {
     text-align: center;
 }
 
+/*formating for main sub-title*/
+h3 {
+    font-style: italic;
+    line-height: 1;
+}
+
+/*format for main image*/
+.main-image{
+    height: 200px;
+}
+
+/*format for two columns*/
 .container-right, .container-left {
     text-align: left;
+    width: 40%;
 }
 .container-left{
     float: left;
-    width: 40%;
     margin-left: 5%;
 }
 
 .container-right{
     float: right;
-    width: 40%;
     margin-right: 5%;
 }
 
+/*heading over each of the two columns*/
 .container-heading{
     text-align: center;
 }
 
-.main-image{
-    height: 200px;
-}
-
-.burger{
+/*formatting for each burger*/
+.burger {
     margin: 10px 0px 10px 0px;
     padding: 10px;
     background-color: palegoldenrod;
     color: darkred;
+    position: relative;
 }
+
 
 .burger-input{
     width: 100%;
     margin: 5px 0px 5px 0px;
     border: none;
     background-color: palegoldenrod;
+    color: saddlebrown;
+    font-family: sans-serif;
+    font-size: medium;
 }
 
 .burger-name{
     font-style: bold;
-    font-size: large;
+    font-size: x-large;
+}
+
+.burger-rating{
+    width: 20px;
+}
+
+.burger-button, .burger-button-delete{
+    margin: 5px;
+    padding: 5px 15px 5px 15px;
+    border: none;
+}
+
+.burger-button {
+    background-color: gold;
+    color: darkgoldenrod;
+}
+
+.burger-button:hover {
+    background-color: darkgoldenrod;
+    color: gold;
+}
+
+.burger-button-update {
+    position:absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.burger-form-delete{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.burger-button-delete {
+    background-color: indianred;
+    color: darkred;
+}
+
+.burger-button-delete:hover {
+    background-color: darkred;
+    color: indianred;
 }

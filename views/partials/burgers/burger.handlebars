@@ -1,0 +1,30 @@
+<div class="burger">
+    {{!--button to delete from database--}}
+    <form class="burger-form-delete" action="/api/{{this.id}}?_method=DELETE" method="POST">
+        <button class="burger-button-delete" type="submit">x</button>
+    </form>
+    {{!--burger information--}}
+    <form action="/api/update/{{this.id}}?_method=PUT" method="POST">
+        <input name="burgerName" class="burger-input burger-name" value="{{this.burger_name}}">
+        {{!--only display the below if this is an 'eaten' burger--}}
+        {{#if this.eaten}}
+            <label class="burger-input" for="rating">Rating:</label>
+            <input name="burgerRating" class="burger-input burger-rating" placeholder="?" value="{{this.burger_rating}}">
+            <textarea name="burgerNotes" class="burger-input burger-notes" placeholder="Enter notes here">{{this.burger_notes}}</textarea>
+        {{/if}}
+        <button class="burger-button" type="submit">Update</button>
+    </form>
+
+    {{#if this.eaten}}
+        {{!--button to move back to waiting-to-eat list--}}
+        <form action="/api/no-eat/{{this.id}}?_method=PUT" method="POST">
+            <button class="burger-button" type="submit">I did not eat this</button>
+        </form>
+    {{/if}}
+    {{#unless this.eaten}}
+        {{!--button to move to the eaten list--}}
+        <form action="/api/eat/{{this.id}}?_method=PUT" method="POST">
+            <button class="burger-button" type="submit">I ate this!</button>
+        </form>
+    {{/unless}}
+</div>
